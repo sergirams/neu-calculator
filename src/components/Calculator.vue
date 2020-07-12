@@ -2,32 +2,32 @@
   .calculator
     .calculator__container
       .display
-          .display-numbers {{current||0}}
+          .display-numbers {{current||'0'}}
       .keyboard
         .keyboard-row
-          button.keyboard-key.keyboard-key--gray AC
-          button.keyboard-key.keyboard-key--gray #[span +/-]
-          button.keyboard-key.keyboard-key--gray %
-          button.keyboard-key.keyboard-key--orange ÷
+          button.keyboard-key.keyboard-key--gray(@click="clearDisplay()") AC
+          button.keyboard-key.keyboard-key--gray(@click="changeSign()") #[span +/-]
+          button.keyboard-key.keyboard-key--gray(@click="convertPercent()") %
+          button.keyboard-key.keyboard-key--orange(@click="division()") ÷
         .keyboard-row
-          button.keyboard-key.keyboard-key--white 7
-          button.keyboard-key.keyboard-key--white 8
-          button.keyboard-key.keyboard-key--white 9
-          button.keyboard-key.keyboard-key--orange ×
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('7')") 7
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('8')") 8
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('9')") 9
+          button.keyboard-key.keyboard-key--orange(@click="multiplication()") ×
         .keyboard-row
-          button.keyboard-key.keyboard-key--white 4
-          button.keyboard-key.keyboard-key--white 5
-          button.keyboard-key.keyboard-key--white 6
-          button.keyboard-key.keyboard-key--orange −
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('4')") 4
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('5')") 5
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('6')") 6
+          button.keyboard-key.keyboard-key--orange(@click="subtraction()") −
         .keyboard-row
-          button.keyboard-key.keyboard-key--white 1
-          button.keyboard-key.keyboard-key--white 2
-          button.keyboard-key.keyboard-key--white 3
-          button.keyboard-key.keyboard-key--orange +
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('1')") 1
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('2')") 2
+          button.keyboard-key.keyboard-key--white(@click="appendSymbol('3')") 3
+          button.keyboard-key.keyboard-key--orange(@click="addition()") +
         .keyboard-row
-          button.keyboard-key.keyboard-key--white.keyboard-key--double 0
-          button.keyboard-key.keyboard-key--white .
-          button.keyboard-key.keyboard-key--orange =
+          button.keyboard-key.keyboard-key--white.keyboard-key--double(@click="appendSymbol('0')") 0
+          button.keyboard-key.keyboard-key--white(@click="convertFloat()") .
+          button.keyboard-key.keyboard-key--orange(@click="equal()") =
 
 </template>
 <script>
@@ -38,6 +38,53 @@ export default {
       previous: null,
       operator: null,
       clickedOperator: null
+    }
+  },
+  methods: {
+    clearDisplay () {
+      this.current = ''
+    },
+    appendSymbol (number) {
+      if (this.clickedOperator) {
+        this.current = ''
+        this.clickedOperator = false
+      }
+      this.current = `${this.current}${number}`
+    },
+    changeSign () {
+      this.current = this.current.charAt(0) === '-' ? this.current.slice(1) : `-${this.current}`
+    },
+    convertPercent () {
+      this.current = `${parseFloat(this.current) / 100}`
+    },
+    convertFloat () {
+      if (this.current.indexOf('.') === -1) {
+        this.appendSymbol('.')
+      }
+    },
+    setPrevious () {
+      this.previous = this.current
+      this.clickedOperator = true
+    },
+    addition () {
+      this.operator = (a, b) => a + b
+      this.setPrevious()
+    },
+    multiplication () {
+      this.operator = (a, b) => a * b
+      this.setPrevious()
+    },
+    division () {
+      this.operator = (a, b) => a / b
+      this.setPrevious()
+    },
+    subtraction () {
+      this.operator = (a, b) => a - b
+      this.setPrevious()
+    },
+    equal () {
+      this.current = `${this.operator(parseFloat(this.current), parseFloat(this.previous))}`
+      this.previous = null
     }
   }
 }
@@ -84,9 +131,6 @@ export default {
           @extend .box-shadow;
           background-color: var(--background-calculator);
           font-size: 2rem;
-          &:focus{
-            outline: 0;
-          }
           &:active{
             @extend .pressed;
           }
