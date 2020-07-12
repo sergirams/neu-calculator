@@ -1,0 +1,29 @@
+$breakpoints: (
+    mobile-xs: 320px,
+    mobile-small: 360px,
+    mobile-big: 640px,
+    tablet: 769px,
+    landscape: 1024px,
+    desktop: 1200px,
+    desktop-big: 1440px
+);
+
+@mixin screen($size) {
+    @if map-has-key($breakpoints, $size) {
+        @media (min-width: map-get($breakpoints, $size)) {
+            @content;
+        }
+    } @else {
+        @warn "Unknown `#{$size}` in $breakpoints";
+    }
+}
+
+@mixin down-screen($size) {
+    @if map-has-key($breakpoints, $size) {
+        @media (max-width: map-get($breakpoints, $size)) {
+            @content;
+        }
+    } @else {
+        @warn "Unknown `#{$size}` in $breakpoints";
+    }
+}
