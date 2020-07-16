@@ -1,17 +1,18 @@
-:root{
-    --app-background-color:#273344;
-    --background-calculator:#f1f3f6;
-    --key: #000;
-    --key-gray:#696e7d;
-    --key-orange:#ff9234;
-    .box-shadow{
-        box-shadow: inset 10px 10px 6px 0 rgba(255, 255, 255, 0.45), 10px 10px 6px 0 rgba(229, 233, 239, 0.6);
-    }
-    .pressed{
-        box-shadow: 10px 10px 6px 0 rgba(255, 255, 255, 0.45), inset 10px 10px 6px 0 rgba(229, 233, 239, 0.6);
-      }
-}
-[theme="dark"]{
+// :root{
+//     --app-background-color:#273344;
+//     --background-calculator:#f1f3f6;
+//     --key: #000;
+//     --key-gray:#696e7d;
+//     --key-orange:#ff9234;
+//     .box-shadow{
+//         box-shadow: inset 10px 10px 6px 0 rgba(255, 255, 255, 0.45), 10px 10px 6px 0 rgba(229, 233, 239, 0.6);
+//     }
+//     .pressed{
+//         box-shadow: 10px 10px 6px 0 rgba(255, 255, 255, 0.45), inset 10px 10px 6px 0 rgba(229, 233, 239, 0.6);
+//       }
+// }
+//[theme="dark"]{
+  :root{
 
     --app-background-color:#f1f3f6;
     --background-calculator:#273344;
