@@ -8,22 +8,22 @@
           button.keyboard-key.keyboard-key--gray(@click="clearDisplay()") AC
           button.keyboard-key.keyboard-key--gray(@click="changeSign()") #[span +/-]
           button.keyboard-key.keyboard-key--gray(@click="convertPercent()") %
-          button.keyboard-key.keyboard-key--orange(@click="handleOperator('÷')") ÷
+          button.operator.keyboard-key.keyboard-key--orange(@click="handleOperator('÷')") ÷
         .keyboard-row
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('7')") 7
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('8')") 8
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('9')") 9
-          button.keyboard-key.keyboard-key--orange(@click="handleOperator('×')") ×
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('7')") 7
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('8')") 8
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('9')") 9
+          button.operator.keyboard-key.keyboard-key--orange(@click="handleOperator('×')") ×
         .keyboard-row
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('4')") 4
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('5')") 5
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('6')") 6
-          button.keyboard-key.keyboard-key--orange(@click="handleOperator('-')") −
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('4')") 4
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('5')") 5
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('6')") 6
+          button.operator.keyboard-key.keyboard-key--orange(@click="handleOperator('-')") −
         .keyboard-row
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('1')") 1
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('2')") 2
-          button.keyboard-key.keyboard-key--white(@click="appendSymbol('3')") 3
-          button.keyboard-key.keyboard-key--orange(@click="handleOperator('+')") +
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('1')") 1
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('2')") 2
+          button.number.keyboard-key.keyboard-key--white(@click="appendSymbol('3')") 3
+          button.operator.keyboard-key.keyboard-key--orange(@click="handleOperator('+')") +
         .keyboard-row
           button.keyboard-key.keyboard-key--white.keyboard-key--double(@click="appendSymbol('0')") 0
           button.keyboard-key.keyboard-key--white(@click="convertDecimal()") .
@@ -49,8 +49,8 @@ export default {
     },
     appendSymbol (number) {
       if (this.clickedOperator) {
-        this.current = number
         this.clickedOperator = false
+        this.current = number
       } else {
         this.current = this.current === '0' ? number : `${this.current}${number}`
       }
