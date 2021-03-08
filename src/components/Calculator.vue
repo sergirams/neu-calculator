@@ -147,6 +147,9 @@ export default {
           @extend .box-shadow;
           background-color: var(--background-calculator);
           font-size: 2rem;
+          &:hover {
+            cursor: pointer;
+          }
           &:active{
             @extend .pressed;
           }
